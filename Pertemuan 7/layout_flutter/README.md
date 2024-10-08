@@ -1,12 +1,17 @@
-# Laporan Jobsheet 7 
+# Laporan Jobsheet 7
+
 # Layout dan Navigasi
 
 ### Najwa Azzahra
+
 ### TI-3C/19
+
 ### 2241720139
 
 #### Praktikum 1
+
 Langkah 2: Buka file lib/main.dart
+
 ```dart
 import 'package:flutter/material.dart';
 
@@ -31,15 +36,16 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
 <img src="img/7-01.png"/>
 
 Langkah 4: Implementasi title row
 
-/* soal 1 */ Letakkan widget Column di dalam widget Expanded agar menyesuaikan ruang yang tersisa di dalam widget Row. Tambahkan properti crossAxisAlignment ke CrossAxisAlignment.start sehingga posisi kolom berada di awal baris.
+/_ soal 1 _/ Letakkan widget Column di dalam widget Expanded agar menyesuaikan ruang yang tersisa di dalam widget Row. Tambahkan properti crossAxisAlignment ke CrossAxisAlignment.start sehingga posisi kolom berada di awal baris.
 
-/* soal 2 */ Letakkan baris pertama teks di dalam Container sehingga memungkinkan Anda untuk menambahkan padding = 8. Teks ‘Batu, Malang, Indonesia' di dalam Column, set warna menjadi abu-abu.
+/_ soal 2 _/ Letakkan baris pertama teks di dalam Container sehingga memungkinkan Anda untuk menambahkan padding = 8. Teks ‘Batu, Malang, Indonesia' di dalam Column, set warna menjadi abu-abu.
 
-/* soal 3 */ Dua item terakhir di baris judul adalah ikon bintang, set dengan warna merah, dan teks "41". Seluruh baris ada di dalam Container dan beri padding di sepanjang setiap tepinya sebesar 32 piksel. Kemudian ganti isi body text ‘Hello World' dengan variabel titleSection seperti berikut:
+/_ soal 3 _/ Dua item terakhir di baris judul adalah ikon bintang, set dengan warna merah, dan teks "41". Seluruh baris ada di dalam Container dan beri padding di sepanjang setiap tepinya sebesar 32 piksel. Kemudian ganti isi body text ‘Hello World' dengan variabel titleSection seperti berikut:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -91,7 +97,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter layout: Putri Ayu Aliciawati, 2241720132',
+      title: 'Flutter layout: Najwa Azzahra, 2241720139',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter layout demo'),
@@ -106,10 +112,13 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
 <img src="img/7-03.png"/>
 
 #### Praktikum 2
+
 Langkah 2: Langkah 2: Buat widget buttonSection
+
 ```dart
 import 'package:flutter/material.dart';
 
@@ -210,10 +219,13 @@ class MyApp extends StatelessWidget {
 }
 
 ```
+
 <img src="img/7-04.png"/>
 
-#### Praktikum 3 
+#### Praktikum 3
+
 Langkah 2: Langkah 2: Buat widget buttonSection
+
 ```dart
 import 'package:flutter/material.dart';
 
@@ -337,10 +349,12 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
 <img src="img/7-06.png"/>
 
 #### Praktikum 4
-Langkah 1:  Siapkan aset gambar
+
+Langkah 1: Siapkan aset gambar
 
 ```dart
   uses-material-design: true
@@ -348,7 +362,7 @@ Langkah 1:  Siapkan aset gambar
   - images/spain.jpg
 ```
 
-Langkah 2:  Tambahkan gambar ke body
+Langkah 2: Tambahkan gambar ke body
 
 ```dart
 import 'package:flutter/material.dart';
@@ -473,4 +487,5 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
 <img src="img/7-07.png"/>
