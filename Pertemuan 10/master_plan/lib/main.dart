@@ -1,0 +1,18 @@
+import 'package:flutter/material.dart';
+import './view/plan_screen.dart';
+
+void main() => runApp(MasterPlanApp());
+
+class MasterPlanApp extends StatelessWidget {
+  const MasterPlanApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+          primarySwatch: Colors.purple,
+          appBarTheme: AppBarTheme(color: Color.fromARGB(255, 208, 182, 212))),
+      home: const PlanScreen(),
+    );
+  }
+}
