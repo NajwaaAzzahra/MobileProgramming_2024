@@ -164,7 +164,9 @@ Pada constructor RedTextWidget, ditambahkan parameter required this.text, yang m
 4. Pada langkah 6 terdapat dua widget yang ditambahkan, jelaskan fungsi dan perbedaannya!
 
 - Fungsi
+- 
 Container Pertama (RedTextWidget): Menampilkan teks dari custom widget RedTextWidget dengan latar belakang kuning dan lebar 50 piksel.
+
 Container Kedua (Text): Menampilkan teks menggunakan widget Text bawaan Flutter dengan latar belakang hijau dan lebar 100 piksel.
 
 **Perbedaan**
@@ -172,16 +174,19 @@ Container Kedua (Text): Menampilkan teks menggunakan widget Text bawaan Flutter 
 - Jenis Widget:
 
 Pertama: custom widget (RedTextWidget) yang dapat dikustomisasi.
+
 Kedua: widget bawaan (Text) yang lebih sederhana.
 
 - Kustomisasi:
 
 Pertama: Menyediakan pengaturan tambahan untuk gaya dan tampilan.
+
 Kedua: Langsung menampilkan teks tanpa opsi tambahan.
 
 - Lebar:
 
 Pertama: Lebar 50 piksel.
+
 Kedua: Lebar 100 piksel.
 
 5. Jelaskan maksud dari tiap parameter yang ada di dalam plugin auto_size_text berdasarkan tautan pada dokumentasi ini !
