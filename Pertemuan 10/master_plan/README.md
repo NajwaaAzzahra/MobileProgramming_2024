@@ -185,7 +185,9 @@ export 'task.dart';
 4. Lakukan capture hasil dari Langkah 9 berupa GIF, kemudian jelaskan apa yang telah Anda buat!
 
 - <img src="img/11-00.png"/>
+
   **Penjelasan**
+  
     Kode program tersebut berfungsi untuk menampilkan daftar tugas, tetapi tidak menangani beberapa aspek pengalaman pengguna yang lebih baik, terutama terkait dengan input teks dan kontrol scrolling.
 
 5. Apa kegunaan method pada Langkah 11 dan 13 dalam lifecyle state ?
@@ -725,13 +727,13 @@ pada praktikum ini ditambahkan screen lain pada aplikasi Master Plan sehingga bi
 
 - Diagram ini alur antar layar dari PlanCreatorScreen ke PlanScreen menggunakan Navigator.push.
 
-  1. Layar pertama yang dibuka adalah PlanCreatorScreen, yang berfungsi untuk membuat daftar rencana baru. Di dalam PlanCreatorScreen, terdapat struktur widget berbasis Column yang berisi:
+    1. Layar pertama yang dibuka adalah PlanCreatorScreen, yang berfungsi untuk membuat daftar rencana baru. Di dalam PlanCreatorScreen, terdapat struktur widget berbasis Column yang berisi:
      - TextField: Widget untuk input teks, di mana pengguna dapat memasukkan nama rencana.
      - Expanded yang membungkus ListView: Menampilkan daftar rencana yang telah ditambahkan.
 
   Ketika ingin melihat detail rencana tertentu, aplikasi menggunakan Navigator.push untuk berpindah ke layar baru (PlanScreen). Navigator.push berfungsi untuk menambahkan layar baru di atas layar saat ini, memungkinkan pengguna untuk kembali ke layar sebelumnya dengan tombol "Back".
 
-  2. Pada PlanScreen, terdapat struktur dengan Scaffold untuk tata letak dasar layar yang berisi:
+    2. Pada PlanScreen, terdapat struktur dengan Scaffold untuk tata letak dasar layar yang berisi:
      - Column: Mengatur tata letak vertikal dari komponen dalam layar.
      - Expanded yang membungkus ListView: Menampilkan daftar tugas dalam rencana yang dipilih.
      - SafeArea: Digunakan untuk memastikan bahwa konten tidak tertutup oleh notch atau area aman perangkat.
