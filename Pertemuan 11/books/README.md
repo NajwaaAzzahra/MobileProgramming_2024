@@ -64,3 +64,20 @@ Future<Response> getData() async {
     - Nilai yang diperoleh dari ketiga fungsi tersebut dijumlahkan dan hasilnya disimpan dalam variabel result.
     
     - Fungsi setState() digunakan untuk memperbarui tampilan UI dengan hasil yang baru.
+
+    <img src="img/s4.png"/>
+
+**Soal 5**
+
+- Jelaskan maksud kode langkah 2 tersebut!
+
+    - getNumber() dipanggil, yang memulai Completer dan memanggil calculate().
+    
+    - calculate() menunggu selama 5 detik (Future.delayed) dan kemudian menyelesaikan Completer dengan nilai 42.
+
+    - getNumber() mengembalikan completer.future, yang akan selesai dengan nilai 42 setelah 5 detik.
+
+    - Nilai tersebut dapat ditunggu  di tempat lain menggunakan .then() atau await.
+
+
+<img src="img/s5.gif"/>
