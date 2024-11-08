@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo Najwa Azzahra',
+      title: 'Flutter Demo Putri',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -34,13 +33,6 @@ class FuturePage extends StatefulWidget {
 class _FuturePageState extends State<FuturePage> {
   String result = '';
 
-  Future<Response> getData() async {
-    const authority = 'www.googleapis.com';
-    const path = '/books/v1/volumes/1rW-QpIAs8UC';
-    Uri url = Uri.http(authority, path);
-    return http.get(url);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,8 +44,17 @@ class _FuturePageState extends State<FuturePage> {
           children: [
             const Spacer(),
             ElevatedButton(
-              child: const Text('GO!'),
-              onPressed: () {},
+              child: Text('GO!'),
+              onPressed: () {
+                setState(() {});
+                getData().then((value) {
+                  result = value.body.toString().substring(0, 450);
+                  setState(() {});
+                }).catchError((_) {
+                  result = 'An error occured';
+                  setState(() {});
+                });
+              },
             ),
             const Spacer(),
             Text(result),
@@ -64,5 +65,12 @@ class _FuturePageState extends State<FuturePage> {
         ),
       ),
     );
+  }
+
+  Future<Response> getData() async {
+    const authority = 'www.googleapis.com';
+    const path = '/books/v1/volumes/1rW-QpIAs8UC';
+    Uri url = Uri.https(authority, path);
+    return http.get(url);
   }
 }

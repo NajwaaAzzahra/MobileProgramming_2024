@@ -42,3 +42,13 @@ Future<Response> getData() async {
 - Kemudian cobalah akses di browser URI tersebut dengan lengkap seperti ini. Jika menampilkan data JSON, maka Anda telah berhasil. 
 
 <img src="img/s2.png"/>
+
+**Soal 3**
+
+- Jelaskan maksud kode langkah 5 tersebut terkait substring dan catchError!
+
+    substring(0, 450) digunakan untuk mengambil sebagian kecil dari string yang diterima, membatasi data hingga 450 karakter pertama.
+    
+    catchError digunakan untuk menangani error yang mungkin terjadi saat mengambil atau memproses data, dan jika ada error, menampilkan pesan 'An error occurred' pada variabel result.
+
+<img src="img/s3.gif"/>
