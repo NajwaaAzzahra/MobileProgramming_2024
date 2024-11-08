@@ -81,3 +81,14 @@ Future<Response> getData() async {
 
 
 <img src="img/s5.gif"/>
+
+
+**Soal 6**
+
+- Jelaskan maksud perbedaan kode langkah 2 dengan langkah 5-6 tersebut!
+
+    - catchError pada kode langkah 2 digunakan untuk menangani error dalam Future yang dikembalikan oleh getNumber().
+
+    - try-catch pada kode langkah 5-6 digunakan untuk menangani error dalam fungsi calculate2(), yang memanfaatkan Completer untuk menangani penyelesaian atau kegagalan dari operasi asinkron secara manual.
+
+<img src="img/s6.gif"/>
