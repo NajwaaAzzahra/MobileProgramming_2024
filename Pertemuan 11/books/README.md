@@ -165,3 +165,22 @@ Future<Response> getData() async {
       - Mengambil lokasi perangkat dengan Geolocator.getCurrentPosition().
 
 <img src="img/s12.gif"/>
+
+
+## Praktikum 7
+
+**Soal 13**
+- Apakah ada perbedaan UI dengan praktikum sebelumnya? Mengapa demikian?
+
+    - Tidak ada perbedaan UI, dikarenakan perbedaan terletak pada kode program yang dijalankan untuk menjalankan lokasi, pada kode program pertama, data harus ditangani dengan manual dengan setState sedangkan kode program kedua dijalankan dari futureBuilder
+
+    <img src="img/s13.gif"/>
+
+**Soal 14**
+
+- Apakah ada perbedaan UI dengan langkah sebelumnya? Mengapa demikian?
+  
+  - Tidak ada perbedaan tampilan UI karena kode program yang baru ditambahkan berfungsi untuk menampilkan pesan error di UI ketika future gagal dijalankan, sedangkan pada percobaan yang dilakukan, tidak ada kondisi error
+
+  <img src="img/s13.gif"/>
+
