@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:books/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const FuturePage(),
+      // home: const FuturePage(),
+      home: LocationScreen(),
     );
   }
 }
@@ -35,31 +37,32 @@ class _FuturePageState extends State<FuturePage> {
   String result = '';
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Back from the Future Najwa'),
-    ),
-    body: Center(
-      child: Column(
-        children: [
-          const Spacer(),
-          ElevatedButton(
-            child: Text('GO!'),
-            onPressed: () {
-              returnError()
-                  .then((value) {
-                    setState(() {
-                      result = 'Success';
-                    });
-                  })
-                  .catchError((error) {
-                    setState(() {
-                      result = error.toString();
-                    });
-                  })
-                  .whenComplete(() => print('Complete'));
-                  // returnFG();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Back from the Future Najwa'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            const Spacer(),
+            ElevatedButton(
+              child: Text('GO!'),
+              onPressed: () {
+                handleError();
+                // returnError()
+                //     .then((value) {
+                //       setState(() {
+                //         result = 'Success';
+                //       });
+                //     })
+                //     .catchError((error) {
+                //       setState(() {
+                //         result = error.toString();
+                //       });
+                //     })
+                //     .whenComplete(() => print('Complete'));
+                // returnFG();
                 // setState(() {});
                 // getData().then((value) {
                 //   result = value.body.toString().substring(0, 450);
@@ -79,18 +82,18 @@ Widget build(BuildContext context) {
                 //     result = 'An error occurred';
                 //   });
                 // });
-            },
-          ),
-          const Spacer(),
-          Text(result),
-          const Spacer(),
-          const CircularProgressIndicator(),
-          const Spacer(),
-        ],
+              },
+            ),
+            const Spacer(),
+            Text(result),
+            const Spacer(),
+            const CircularProgressIndicator(),
+            const Spacer(),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   late Completer completer;
 
@@ -162,6 +165,18 @@ Widget build(BuildContext context) {
   Future returnError() async {
     await Future.delayed(const Duration(seconds: 2));
     throw Exception('Something terrible happened');
+  }
+
+  Future handleError() async {
+    try {
+      await returnError();
+    } catch (error) {
+      setState(() {
+        result = error.toString();
+      });
+    } finally {
+      print('Complete');
+    }
   }
 
   // void returnFG() {

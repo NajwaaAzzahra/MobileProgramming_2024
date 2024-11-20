@@ -118,3 +118,50 @@ Future<Response> getData() async {
 
 <img src="img/s9.gif"/>
 
+
+**Soal 10**
+
+- Panggil method handleError() tersebut di ElevatedButton. Apa hasilnya? 
+
+  - Method handleError menggunakan blok try-catch-finally untuk menangani error yang dilempar oleh returnError().
+  - Jika returnError() melempar error (setelah delay 2 detik), blok catch akan menangkap error tersebut.
+  - lok finally akan selalu dijalankan setelah try atau catch, mencetak pesan 'Complete'.
+
+- Jelaskan perbedaan kode langkah 1 dan 4!
+
+  - Pada langkah 1 penanganan error menggunakan chaining .then(), .catchError(), dan .whenComplete(), sehingga error ditangani langsung di dalam method .catchError() tanpa menulis kode tambahan
+  - Pada langkah 4 penanganan error menggunakan blok try-catch-finally, sehingga error ditangani di dalam blok catch di method handleError yang memungkinkan fleksibilitas lebih besar untuk penanganan logika tambahan jika diperlukan
+
+<img src="img/s10.gif"/>
+
+
+## Praktikum 6
+
+**Soal 11**
+
+- Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda.
+
+```dart
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Najwa Current Location')),
+      body: Center(child: Text(myPosition)),
+    );
+  }
+```
+
+<img src="img/s11.gif"/>
+
+
+**Soal 12**
+
+- Apakah Anda mendapatkan koordinat GPS ketika run di browser? Mengapa demikian?
+
+    - Iya, karena menggunakan library geolocator untuk mengakses informasi lokasi perangkat. 
+    Pada kode program yang dituliskan:
+      - Memastikan izin lokasi diberikan (Geolocator.requestPermission()).
+      - Memeriksa apakah layanan lokasi aktif (Geolocator.isLocationServiceEnabled()).
+      - Mengambil lokasi perangkat dengan Geolocator.getCurrentPosition().
+
+<img src="img/s12.gif"/>
