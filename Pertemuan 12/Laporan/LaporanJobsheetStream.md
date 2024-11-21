@@ -73,3 +73,15 @@ class ColorStream {
 
     - Pada listen setiap kali ada data baru yang dihasilkan oleh stream, callback yang diberikan ke listen akan dipanggil. Listen cocok untuk pemrosesan reaktif dimana aplikasi terus merespons data baru.
     Sedangkan pada await for digunakan untuk mengiterasi elemen dalam stream, seperti for loop pada koleksi biasa. Namun, alur eksekusi akan tertahan hingga semua elemen dalam stream selesai diolah, sehingga await for cocok digunakan untuk alur sekuensial
+
+**Soal 5**
+
+<img src="img/s6.gif"/>
+
+- Jelaskan maksud kode langkah 8 dan 10 tersebut!
+
+    - Pada initState(), stream dan controller diinisialisasi.
+    - Listener didaftarkan ke stream untuk memproses event baru dan mengubah nilai lastNumber saat data diterima.
+    - Ketika addRandomNumber() dipanggil, angka acak dihasilkan dan ditambahkan ke sink milik numberStreamController.
+    - Data yang masuk ke sink langsung mengalir ke stream.
+    - Listener pada stream menangkap data ini, memprosesnya, dan memperbarui UI melalui setState().
