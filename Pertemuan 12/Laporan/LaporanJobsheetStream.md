@@ -101,3 +101,24 @@ class ColorStream {
     - addRandomNumber()
         
         Fungsi ini semula mungkin digunakan untuk menambahkan angka acak ke dalam stream, tetapi saat ini yang dipanggil yaitu numberStream.addError() di dalamnya. Ini berarti bahwa ketika fungsi ini dipanggil, stream akan menerima error ('Error'), yang kemudian akan memicu callback onError.
+
+**Soal 8**
+
+<img src="img/s8.gif"/>
+
+- Jelaskan maksud kode langkah 1-3 tersebut!
+
+    - langkah 1: inisialisasi StreamTransformer yang bertugas memproses data dari stream
+    - langkah 2: memberikan value untuk data yang akan ditampilkan 
+        - handleData: Mengalikan data dengan 10 sebelum diteruskan ke stream berikutnya.
+        - handleError: Jika terjadi error, mengirim nilai -1 sebagai fallback.
+        - handleDone: Menutup stream ketika selesai. 
+    - langkah 3: mendaftarkan listener untuk memproses event baru dari stream.
+        - onData (event): Ketika ada data baru, nilai lastNumber diperbarui dengan data tersebut.
+        - onError: Jika terjadi error, nilai lastNumber diset menjadi -1.
+
+**Soal 9**
+
+<img src="img/s9.gif"/>
+
+- Jelaskan maksud kode langkah 2, 6 dan 8 tersebut!

@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,24 +27,16 @@ class StreamHomePage extends StatefulWidget {
 
   @override
   State<StreamHomePage> createState() => _StreamHomePageState();
-  
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
+  late StreamTransformer<int, int> transformer;
   Color bgColor = Colors.blueGrey;
   late ColorStream colorStream;
 
   int lastNumber = 0;
-  late StreamController numberStreamController;
+  late StreamController<int> numberStreamController;
   late NumberStream numberStream;
-
-  // void changeColor() async {
-  //   await for (var eventColor in colorStream.getColors()) {
-  //     setState(() {
-  //       bgColor = eventColor;
-  //     });
-  //   }
-  // }
 
   void changeColor() {
     colorStream.getColors().listen((eventColor) {
@@ -55,28 +46,40 @@ class _StreamHomePageState extends State<StreamHomePage> {
     });
   }
 
- @override
-void initState() {
-  numberStream = NumberStream();
-  numberStreamController = numberStream.controller;
-  Stream stream = numberStreamController.stream;
+  @override
+  void initState() {
+    super.initState();
 
-  stream.listen(
-    (event) {
-      setState(() {
-        lastNumber = event; // Data baru diterima
-      });
-    },
-    onError: (error) {
-      setState(() {
-        lastNumber = -1; // Error terjadi
-      });
-    },
-  );
+    // Inisialisasi transformer
+    transformer = StreamTransformer<int, int>.fromHandlers(
+      handleData: (value, sink) {
+        sink.add(value * 10);
+      },
+      handleError: (error, trace, sink) {
+        sink.add(-1);
+      },
+      handleDone: (sink) {
+        sink.close();
+      },
+    );
 
-  super.initState();
-}
+    numberStream = NumberStream();
+    numberStreamController = numberStream.controller;
 
+    Stream stream = numberStreamController.stream.transform(transformer);
+    stream.listen(
+      (event) {
+        setState(() {
+          lastNumber = event;
+        });
+      },
+      onError: (error) {
+        setState(() {
+          lastNumber = -1;
+        });
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -88,7 +91,6 @@ void initState() {
     Random random = Random();
     int myNum = random.nextInt(10);
     numberStream.addNumberToSink(myNum);
-    // numberStream.addError();
   }
 
   @override
@@ -107,7 +109,7 @@ void initState() {
             Text(lastNumber.toString()),
             ElevatedButton(
               onPressed: () => addRandomNumber(),
-              child: Text("New Random Number"),
+              child: const Text("New Random Number"),
             )
           ],
         ),
