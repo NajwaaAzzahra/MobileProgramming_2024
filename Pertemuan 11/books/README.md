@@ -184,3 +184,74 @@ Future<Response> getData() async {
 
   <img src="img/s13.gif"/>
 
+
+**Soal 15**
+
+- Tambahkan nama panggilan Anda pada tiap properti title sebagai identitas pekerjaan Anda dan silakan ganti dengan warna tema favorit Anda.
+
+<img src="img/s15.png"/>
+
+**Soal 16**
+
+- Cobalah klik setiap button, apa yang terjadi? Mengapa demikian?
+
+  - Awalnya background color berwarna ungu, ketika change color ditekan, fungsi _navigateAndGetColor memanggil layar kedua menggunakan Navigator.push
+  - Ketika memilih tombol warna, warna yang dipilih dikirim kembali ke layar pertama menggunakan Navigator.pop(context, color)
+  - Fungsi _navigateAndGetColor menangkap nilai warna yang dikembalikan dari layar kedua, nilai warna tersebut menggantikan variabel color di layar pertama. Fungsi setState dipanggil untuk merender ulang layar dengan warna latar belakang baru. 
+
+<img src="img/s16.png"/>
+
+- Gantilah 3 warna pada langkah 5 dengan warna favorit Anda!
+
+```dart
+import 'package:flutter/material.dart';
+
+class NavigationSecond extends StatefulWidget {
+  const NavigationSecond({super.key});
+
+  @override
+  State<NavigationSecond> createState() => _NavigationSecondState();
+}
+
+class _NavigationSecondState extends State<NavigationSecond> {
+  @override
+  Widget build(BuildContext context) {
+    Color color;
+    return Scaffold(
+        appBar: AppBar(
+            title: const Text('Najwa Navigation Second Screen'),
+        ),
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                    ElevatedButton(
+                        child: const Text('Red'),
+                        onPressed: () {
+                            color = Colors.red.shade200;
+                            Navigator.pop(context,color);
+                        }
+                    ),
+                    ElevatedButton(
+                        child: const Text('Green'),
+                        onPressed: () {
+                            color = Colors.green.shade200;
+                            Navigator.pop(context,color);
+                        }
+                    ),
+                    ElevatedButton(
+                        child: const Text('Blue'),
+                        onPressed: () {
+                            color = Colors.blue.shade200;
+                            Navigator.pop(context,color);
+                        },
+                    )
+                ],
+            ),
+        ),
+    );
+  }
+}
+```
+
+<img src="img/s16b.gif"/>
