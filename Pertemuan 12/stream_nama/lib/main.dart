@@ -31,6 +31,7 @@ class StreamHomePage extends StatefulWidget {
 
 class _StreamHomePageState extends State<StreamHomePage> {
   late StreamTransformer<int, int> transformer;
+  late StreamSubscription subscription;
   Color bgColor = Colors.blueGrey;
   late ColorStream colorStream;
 
@@ -46,51 +47,78 @@ class _StreamHomePageState extends State<StreamHomePage> {
     });
   }
 
+  void stopStream() {
+    numberStreamController.close();
+  }
+
   @override
   void initState() {
-    super.initState();
-
-    // Inisialisasi transformer
-    transformer = StreamTransformer<int, int>.fromHandlers(
-      handleData: (value, sink) {
-        sink.add(value * 10);
-      },
-      handleError: (error, trace, sink) {
-        sink.add(-1);
-      },
-      handleDone: (sink) {
-        sink.close();
-      },
-    );
+    // // Inisialisasi transformer
+    // transformer = StreamTransformer<int, int>.fromHandlers(
+    //   handleData: (value, sink) {
+    //     sink.add(value * 10);
+    //   },
+    //   handleError: (error, trace, sink) {
+    //     sink.add(-1);
+    //   },
+    //   handleDone: (sink) {
+    //     sink.close();
+    //   },
+    // );
 
     numberStream = NumberStream();
     numberStreamController = numberStream.controller;
 
-    Stream stream = numberStreamController.stream.transform(transformer);
-    stream.listen(
-      (event) {
-        setState(() {
-          lastNumber = event;
-        });
-      },
-      onError: (error) {
-        setState(() {
-          lastNumber = -1;
-        });
-      },
-    );
+    Stream stream = numberStreamController.stream;
+    subscription = stream.listen((event) {
+      setState(() {
+        lastNumber = event;
+      });
+    });
+
+    subscription.onError((error) {
+      setState(() {
+        lastNumber = -1;
+      });
+    });
+
+    subscription.onDone(() {
+      print("OnDone was called");
+    });
+
+    // Stream stream = numberStreamController.stream.transform(transformer);
+    // stream.listen(
+    //   (event) {
+    //     setState(() {
+    //       lastNumber = event;
+    //     });
+    //   },
+    //   onError: (error) {
+    //     setState(() {
+    //       lastNumber = -1;
+    //     });
+    //   },
+    // );
+    super.initState();
   }
 
   @override
   void dispose() {
     numberStreamController.close();
     super.dispose();
+    subscription.cancel();
   }
 
   void addRandomNumber() {
     Random random = Random();
     int myNum = random.nextInt(10);
-    numberStream.addNumberToSink(myNum);
+    if (!numberStreamController.isClosed) {
+      numberStream.addNumberToSink(myNum);
+    } else {
+      setState(() {
+        lastNumber = -1;
+      });
+    }
   }
 
   @override
@@ -106,11 +134,18 @@ class _StreamHomePageState extends State<StreamHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(lastNumber.toString()),
+            Text(
+              lastNumber.toString(),
+              style: const TextStyle(fontSize: 32),
+            ),
             ElevatedButton(
-              onPressed: () => addRandomNumber(),
-              child: const Text("New Random Number"),
-            )
+              onPressed: () => addRandomNumber(), // Add random number to stream
+              child: const Text("Add Random Number"),
+            ),
+            ElevatedButton(
+              onPressed: () => stopStream(), // Stop the subscription
+              child: const Text("Stop Subscription"),
+            ),
           ],
         ),
       ),

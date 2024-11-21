@@ -121,4 +121,12 @@ class ColorStream {
 
 <img src="img/s9.gif"/>
 
+<img src="img/s9.png"/>
+
 - Jelaskan maksud kode langkah 2, 6 dan 8 tersebut!
+
+    - langkah 2: mengatur stream dan mendengarkan (listen) data dari stream menggunakan StreamSubscription
+
+    - langkah 6:  menghentikan langganan (subscription) pada stream. Dengan memanggil subscription.cancel(), aplikasi akan berhenti mendengarkan data dari stream.
+
+    - langkah 8: Fungsi addRandomNumber() digunakan untuk menambahkan data baru ke stream menggunakan sink dari numberStreamController.
