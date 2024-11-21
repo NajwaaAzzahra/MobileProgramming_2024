@@ -184,6 +184,7 @@ Future<Response> getData() async {
 
   <img src="img/s13.gif"/>
 
+## Praktikum 8
 
 **Soal 15**
 
@@ -255,3 +256,82 @@ class _NavigationSecondState extends State<NavigationSecond> {
 ```
 
 <img src="img/s16b.gif"/>
+
+
+## Praktikum 9
+
+**Soal 17**
+- Cobalah klik setiap button, apa yang terjadi ? Mengapa demikian ?
+  - Background color akan berubah sesuai dengan button yang di klik pengguna. Ketika button change color ditekan, maka fungsi _showColorDialog(context) dipanggil yang berguna untuk menampilkan alertDialog yang memilikan 3 opsi warna background, setelah background color dipilih, fungsi setState() dipanggil, yang berguna untuk mengubah value variabel color.
+
+<img src="img/s17.gif"/>
+
+- Gantilah 3 warna pada langkah 3 dengan warna favorit Anda!
+
+```dart
+class _NavigationDialogScreenState extends State<NavigationDialogScreen> {
+  Color color = Colors.purple.shade200;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: color,
+      appBar: AppBar(
+        title: const Text('Najwa Navigation Dialog Screen'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('Change Color'),
+          onPressed: () {
+            _showColorDialog(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showColorDialog(BuildContext context) async {
+    await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Very important question'),
+          content: const Text('Please choose color'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Pink'),
+              onPressed: () {
+                setState(() {
+                  color = Colors.red.shade200;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Mocca'),
+              onPressed: () {
+                setState(() {
+                  color = Colors.brown.shade200;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Blue'),
+              onPressed: () {
+                setState(() {
+                  color = Colors.blue.shade200;
+                });
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+```
+
+<img src="img/s17b.gif"/>
