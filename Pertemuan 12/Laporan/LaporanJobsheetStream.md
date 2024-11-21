@@ -44,3 +44,23 @@ class ColorStream {
     Colors.blueAccent,
   ];
 }
+
+**Soal 3**
+
+- Jelaskan fungsi keyword yield* pada kode tersebut!
+
+    - yield* digunakan dalam generator function untuk menghasilkan semua elemen secara berurutan tanpa menuliskan loop manual.
+
+- Apa maksud isi perintah kode tersebut?
+
+    - Kode tersebut menghasilkan semua elemen dari list yang telah diinisialisasi sebelum
+
+        - Saat getColors() dipanggil, ia memulai sebuah async generator function.
+
+        - Stream.periodic menghasilkan warna berdasarkan waktu yang dihitung setiap detik.
+
+        - Setiap warna yang dihasilkan oleh Stream.periodic diteruskan ke output getColors() menggunakan yield*.
+
+**Soal 4**
+
+<img src="img/s4.gif"/>
