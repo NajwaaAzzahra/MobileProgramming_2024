@@ -64,3 +64,12 @@ class ColorStream {
 **Soal 4**
 
 <img src="img/s4.gif"/>
+
+**Soal 5**
+
+<img src="img/s5.gif"/>
+
+- Jelaskan perbedaan menggunakan listen dan await for
+
+    - Pada listen setiap kali ada data baru yang dihasilkan oleh stream, callback yang diberikan ke listen akan dipanggil. Listen cocok untuk pemrosesan reaktif dimana aplikasi terus merespons data baru.
+    Sedangkan pada await for digunakan untuk mengiterasi elemen dalam stream, seperti for loop pada koleksi biasa. Namun, alur eksekusi akan tertahan hingga semua elemen dalam stream selesai diolah, sehingga await for cocok digunakan untuk alur sekuensial
