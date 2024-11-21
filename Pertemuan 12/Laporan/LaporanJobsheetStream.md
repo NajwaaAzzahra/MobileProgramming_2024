@@ -74,7 +74,7 @@ class ColorStream {
     - Pada listen setiap kali ada data baru yang dihasilkan oleh stream, callback yang diberikan ke listen akan dipanggil. Listen cocok untuk pemrosesan reaktif dimana aplikasi terus merespons data baru.
     Sedangkan pada await for digunakan untuk mengiterasi elemen dalam stream, seperti for loop pada koleksi biasa. Namun, alur eksekusi akan tertahan hingga semua elemen dalam stream selesai diolah, sehingga await for cocok digunakan untuk alur sekuensial
 
-**Soal 5**
+**Soal 6**
 
 <img src="img/s6.gif"/>
 
@@ -85,3 +85,19 @@ class ColorStream {
     - Ketika addRandomNumber() dipanggil, angka acak dihasilkan dan ditambahkan ke sink milik numberStreamController.
     - Data yang masuk ke sink langsung mengalir ke stream.
     - Listener pada stream menangkap data ini, memprosesnya, dan memperbarui UI melalui setState().
+
+**Soal 7**
+
+- Jelaskan maksud kode langkah 13 sampai 15 tersebut!
+
+    - controller.addError('Error')
+        
+        Fungsi addError pada stream controller digunakan untuk mem-push sebuah error ke dalam stream. Dalam hal ini, string 'Error' akan diproses sebagai error. Setelah error ini ditambahkan ke stream, stream akan men-trigger callback onError yang sudah  ditentukan sebelumnya dalam stream.listen.
+
+    - onError
+        
+        Ketika stream menerima error (seperti yang dipicu dengan addError), callback onError akan dijalankan. Dalam hal ini, error ditangani dengan mengganti nilai lastNumber menjadi -1 (menandakan bahwa ada error yang terjadi).
+
+    - addRandomNumber()
+        
+        Fungsi ini semula mungkin digunakan untuk menambahkan angka acak ke dalam stream, tetapi saat ini yang dipanggil yaitu numberStream.addError() di dalamnya. Ini berarti bahwa ketika fungsi ini dipanggil, stream akan menerima error ('Error'), yang kemudian akan memicu callback onError.

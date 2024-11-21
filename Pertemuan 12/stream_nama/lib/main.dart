@@ -28,6 +28,7 @@ class StreamHomePage extends StatefulWidget {
 
   @override
   State<StreamHomePage> createState() => _StreamHomePageState();
+  
 }
 
 class _StreamHomePageState extends State<StreamHomePage> {
@@ -54,20 +55,28 @@ class _StreamHomePageState extends State<StreamHomePage> {
     });
   }
 
-  @override
-  void initState() {
-    numberStream = NumberStream();
-    numberStreamController = numberStream.controller;
-    Stream stream = numberStreamController.stream;
-    stream.listen((event) {
+ @override
+void initState() {
+  numberStream = NumberStream();
+  numberStreamController = numberStream.controller;
+  Stream stream = numberStreamController.stream;
+
+  stream.listen(
+    (event) {
       setState(() {
-        lastNumber = event;
+        lastNumber = event; // Data baru diterima
       });
-    });
-    super.initState();
-    // colorStream = ColorStream();
-    // changeColor();
-  }
+    },
+    onError: (error) {
+      setState(() {
+        lastNumber = -1; // Error terjadi
+      });
+    },
+  );
+
+  super.initState();
+}
+
 
   @override
   void dispose() {
@@ -79,6 +88,7 @@ class _StreamHomePageState extends State<StreamHomePage> {
     Random random = Random();
     int myNum = random.nextInt(10);
     numberStream.addNumberToSink(myNum);
+    // numberStream.addError();
   }
 
   @override
