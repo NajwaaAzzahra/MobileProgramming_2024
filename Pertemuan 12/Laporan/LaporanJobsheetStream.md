@@ -152,3 +152,12 @@ class ColorStream {
     - Fungsi stopStream() dipanggil untuk menutup stream.
     - Setelah ini, stream tidak dapat mengirimkan data lagi. Jika addRandomNumber() dipanggil, error -1 akan ditampilkan.
     - Jika terjadi error dalam stream, teks angka terakhir akan diubah menjadi -1.
+
+**Soal 12**
+
+<img src="img/s12.gif"/>
+
+- Jelaskan maksud kode pada langkah 3 dan 7 !
+
+  - Langkah 3: Membuat aliran data (stream) berupa angka acak antara 0 dan 9 yang diperbarui setiap detik.
+  - Langkah 7: Memperbarui UI berdasarkan data dari NumberStream secara real-time.
