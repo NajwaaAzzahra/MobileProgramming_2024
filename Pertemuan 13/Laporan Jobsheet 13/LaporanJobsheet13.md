@@ -521,137 +521,86 @@ Future getPaths() async {
 
 ## Praktikum 5: Accessing the filesystem, part 2: Working with directories
 
-1. 
+1.  Di bagian atas berkas main.dart, impor pustaka dart:io:
+
+```
+import 'dart:io';
+```
+
+2. Di bagian atas kelas _MyHomePageState, di file main.dart, buat dua variabel State baru untuk file dan isinya:
+
+```dart
+late File myFile;
+String fileText='';
+```
+
+3.  Masih dalam kelas MyHomePageState, buat metode baru bernama writeFile dan gunakan kelas File dari pustaka dart:io untuk membuat file baru:
+
+```dart
+Future<bool> writeFile() async {
+  try {
+    await myFile.writeAsString('Margherita, Capricciosa Napoli');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+```
+
+4. Dalam metode initState, setelah memanggil metode getPaths, dalam metode then, buat sebuah file dan panggil metode writeFile:
+
 
 ```dart
 
+  @override
+  void initState() {
+    getPaths().then((_) {
+      myFile = File('$documentPath/pizza.txt');
+      writeFile();
+    });
+    super.initState();
+  }
 ```
 
-2.
+5. Buat metode untuk membaca file:
 
 ```dart
-
+Future<bool> readFile() async {
+  try {
+    //read the file
+    String fileContent = await myFile.readAsString();
+    setState(() {
+      fileText = fileContent;
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
 ```
-
-3.
+6. Dalam metode build, di widget Column, perbarui antarmuka pengguna dengan ElevatedButton. Ketika pengguna menekan tombol, tombol akan mencoba membaca konten file dan menampilkannya di layar, cek kode cetak tebal:
 
 ```dart
-
+children: [
+          Text(
+            'Doc path: $documentPath',
+          ),
+          Text(
+            'Temp path: $tempPath',
+          ),
+          ElevatedButton (
+            child: const Text('Read File'),
+            onPressed: () => readFile(),
+          ),
+          Text(fileText),
+        ],
 ```
 
-4.
+7. Jalankan aplikasi dan tekan tombol Baca File. Di bawah tombol tersebut, Anda akan melihat teks Margherita, Capricciosa, Napoli, seperti yang ditunjukkan pada tangkapan layar berikut:
 
-```dart
 
-```
+<img src = img/5.7.gif> 
 
-5.
-
-```dart
-
-```
-
-6.
-
-```dart
-
-```
-
-7.
-
-```dart
-
-```
-
-8.
-
-```dart
-
-```
-
-9.
-
-```dart
-
-```
-
-10.
-
-```dart
-
-```
-
-11.
-
-```dart
-
-```
-
-12.
-
-```dart
-
-```
-
-13.
-
-```dart
-
-```
-
-14.
-
-```dart
-
-```
-
-15.
-
-```dart
-
-```
-
-16.
-
-```dart
-
-```
-
-17.
-
-```dart
-
-```
-
-18.
-
-```dart
-
-```
-
-19.
-
-```dart
-
-```
-
-20.
-
-```dart
-
-```
-
-21.
-
-```dart
-
-```
-
-22.
-
-```dart
-
-```
 
 ## Praktikum 6: Using secure storage to store data
 
