@@ -604,134 +604,140 @@ children: [
 
 ## Praktikum 6: Using secure storage to store data
 
-1.
+1. Tambahkan flutter_secure_storage ke proyek Anda, dengan mengetik:
+
+<img src="img/6.1.png"/>
+
+2. Di file main.dart, salin kode berikut:
 
 ```dart
+import 'package:flutter/material.dart';
+
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final pwdController = TextEditingController();
+  String myPass = '';
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Najwa Path Provider'),
+        backgroundColor: const Color.fromARGB(255, 159, 190, 205),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: pwdController,
+              ),
+              ElevatedButton(
+                child: const Text('Save Value'),
+                onPressed: () {
+                  writeToSecureStorage();
+                },
+              ),
+              Text(myPass),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
 ```
 
-2.
+3.  Di bagian atas file main.dart, tambahkan impor yang diperlukan:
 
 ```dart
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 ```
 
-3.
+4. Di bagian atas kelas _myHomePageState, buat penyimpanan yang aman:
 
 ```dart
-
+  final storage = const FlutterSecureStorage();
+  final myKey = 'myPass';
 ```
 
-4.
+5. Di kelas _myHomePageState, tambahkan metode untuk menulis data ke penyimpanan aman:
 
 ```dart
-
+  Future writeToSecureStorage() async {
+    await storage.write(key: myKey, value: pwdController.text);
+  }
 ```
 
-5.
+6.  Pada metode build() dari kelas _myHomePageState, tambahkan kode yang akan menulis ke penyimpanan ketika pengguna menekan tombol Save Value, cek kode cetak tebal:
+
 
 ```dart
-
+ElevatedButton(
+                child: const Text('Save Value'),
+                onPressed: () {
+                  writeToSecureStorage();
+                },
+              ),
 ```
 
-6.
+7. Di kelas _myHomePageState, tambahkan metode untuk membaca data dari penyimpanan aman:
 
 ```dart
-
+ Future<String> readFromSecureStorage() async {
+    String secret = await storage.read(key: myKey) ?? '';
+    return secret;
+  }
+}
 ```
 
-7.
+8. Pada metode build() dari kelas _myHomePageState, tambahkan kode untuk membaca dari penyimpanan ketika pengguna menekan tombol Read Value dan memperbarui variabel myPass State:
 
 ```dart
-
+ElevatedButton(
+                child: const Text('Read Value'),
+                onPressed: () {
+                  readFromSecureStorage().then((value) {
+                    setState(() {
+                      myPass = value;
+                    });
+                  });
+                },
+              ),
 ```
 
-8.
+9. Jalankan aplikasi dan tulis beberapa teks pilihan Anda di bidang teks. Kemudian, tekan tombol Save Value. Setelah itu, tekan tombol Read Value. Anda akan melihat teks yang Anda ketik di kolom teks, seperti yang ditunjukkan pada tangkapan layar berikut:
 
-```dart
-
-```
-
-9.
-
-```dart
-
-```
-
-10.
-
-```dart
-
-```
-
-11.
-
-```dart
-
-```
-
-12.
-
-```dart
-
-```
-
-13.
-
-```dart
-
-```
-
-14.
-
-```dart
-
-```
-
-15.
-
-```dart
-
-```
-
-16.
-
-```dart
-
-```
-
-17.
-
-```dart
-
-```
-
-18.
-
-```dart
-
-```
-
-19.
-
-```dart
-
-```
-
-20.
-
-```dart
-
-```
-
-21.
-
-```dart
-
-```
-
-22.
-
-```dart
-
-```
+<img src = img/6.9.gif> 
