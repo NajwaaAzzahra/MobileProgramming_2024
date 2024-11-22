@@ -444,141 +444,84 @@ onPressed: () {
 
 ## Praktikum 4: Accessing the filesystem, part 1: path_provider
 
-1.
-
-```dart
+1. menambahkan dependency yang relevan ke file pubspec.yaml. Tambahkan path_provider dengan mengetikkan perintah ini dari Terminal Anda:
 
 ```
-
-2.
-
-```dart
-
+flutter pub add path_provider
 ```
 
-3.
+<img src = img/4.1.png> 
 
-```dart
-
-```
-
-4.
-
-```dart
+2. Di bagian atas file main.dart, tambahkan impor path_provider:
 
 ```
-
-5.
-
-```dart
-
+import 'package:path_provider/path_provider.dart';
 ```
 
-6.
+3. Di bagian atas kelas _MyHomePageState, tambahkan variabel State yang akan kita gunakan untuk memperbarui antarmuka pengguna:
 
 ```dart
-
+String documentPath='';
+  String tempPath='';
 ```
 
-7.
+4. Masih dalam kelas _MyHomePageState, tambahkan metode untuk mengambil direktori temporary dan dokumen:
 
 ```dart
+Future getPaths() async {
+    final docDir = await getApplicationDocumentsDirectory();
+    final tempDir = await getTemporaryDirectory();
 
+    setState(() {
+      documentPath = docDir.path;
+      tempPath = tempDir.path;
+    });
+  }
 ```
 
-8.
+5. Pada metode initState dari kelas _MyHomePageState, panggil metode getPaths:
 
 ```dart
-
+@override
+  void initState() {
+    super.initState();
+    getPaths();
+  }
 ```
 
-9.
+6. Pada metode build _MyHomePageState, buat UI dengan dua widget Teks yang menunjukkan path yang diambil:
 
 ```dart
-
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text('Najwa Path Provider'),
+          backgroundColor: const Color.fromARGB(255, 225, 208, 196)),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            'Doc path: $documentPath',
+            style: const TextStyle(fontSize: 16),
+          ),
+          Text(
+            'Temp path: $tempPath',
+            style: const TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
 ```
 
-10.
+7. Jalankan aplikasi. Anda akan melihat layar yang terlihat seperti berikut ini:
 
-```dart
-
-```
-
-11.
-
-```dart
-
-```
-
-12.
-
-```dart
-
-```
-
-13.
-
-```dart
-
-```
-
-14.
-
-```dart
-
-```
-
-15.
-
-```dart
-
-```
-
-16.
-
-```dart
-
-```
-
-17.
-
-```dart
-
-```
-
-18.
-
-```dart
-
-```
-
-19.
-
-```dart
-
-```
-
-20.
-
-```dart
-
-```
-
-21.
-
-```dart
-
-```
-
-22.
-
-```dart
-
-```
+<img src = img/4.7.png> 
 
 ## Praktikum 5: Accessing the filesystem, part 2: Working with directories
 
-1.
+1. 
 
 ```dart
 
