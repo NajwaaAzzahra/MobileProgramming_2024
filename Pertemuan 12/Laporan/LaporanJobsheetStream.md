@@ -4,7 +4,6 @@
 - **Kelas**: TI-3C
 - **NIM**: 2241720139
 
-## Praktikum 1
 
 **Soal 1**
 
@@ -161,3 +160,15 @@ class ColorStream {
 
   - Langkah 3: Membuat aliran data (stream) berupa angka acak antara 0 dan 9 yang diperbarui setiap detik.
   - Langkah 7: Memperbarui UI berdasarkan data dari NumberStream secara real-time.
+
+**Soal 13**
+
+<img src="img/s13.gif"/>
+
+- Jelaskan maksud praktikum ini ! Dimanakah letak konsep pola BLoC-nya ?
+
+  - Konsep pola BLoC pada praktikum ini adalah:
+
+      - Event-driven dengan menggunakan StreamController untuk menangani input (perintah untuk menghasilkan angka acak) dan output (angka acak yang dihasilkan).
+      - Stream digunakan untuk menghubungkan antara BLoC dan UI, memastikan pemisahan yang jelas antara keduanya.
+      - Pemisahan logika bisnis dan UI yang memudahkan pemeliharaan dan pengembangan aplikasi.
