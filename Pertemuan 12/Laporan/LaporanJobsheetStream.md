@@ -130,3 +130,25 @@ class ColorStream {
     - langkah 6:  menghentikan langganan (subscription) pada stream. Dengan memanggil subscription.cancel(), aplikasi akan berhenti mendengarkan data dari stream.
 
     - langkah 8: Fungsi addRandomNumber() digunakan untuk menambahkan data baru ke stream menggunakan sink dari numberStreamController.
+
+**Soal 10**
+
+<img src="img/s10.png"/>
+
+- Jelaskan mengapa error itu bisa terjadi?
+
+    - Kesalahan "Bad state: Stream has already been listened to" terjadi karena sebuah stream bertipe single-subscription (default) mencoba didengarkan (listened) lebih dari sekali. Secara bawaan, StreamController di Dart menghasilkan single-subscription stream, yang berarti hanya satu listener yang dapat berlangganan ke stream tersebut. Ketika Anda mencoba menambahkan lebih dari satu listener ke stream yang sama, kesalahan ini muncul.
+
+**Soal 11**
+
+<img src="img/s11.gif"/>
+
+- Jelaskan mengapa hal itu bisa terjadi ?
+
+    - Halaman utama StreamHomePage ditampilkan.
+    - Stream dibuat dan listener aktif untuk memantau data yang dikirim.
+    - Fungsi addRandomNumber() menghasilkan angka acak dan mengirimkan angka tersebut ke stream.
+    - Listener menerima angka tersebut dan memperbarui teks di UI.
+    - Fungsi stopStream() dipanggil untuk menutup stream.
+    - Setelah ini, stream tidak dapat mengirimkan data lagi. Jika addRandomNumber() dipanggil, error -1 akan ditampilkan.
+    - Jika terjadi error dalam stream, teks angka terakhir akan diubah menjadi -1.
