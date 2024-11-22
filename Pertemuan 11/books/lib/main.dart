@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       // home: const FuturePage(),
       // home: const NavigationFirst(),
       // home: LocationScreen(),
-      home: NavigationDialogScreen(),
+      home: FuturePage(),
     );
   }
 }
@@ -39,6 +40,22 @@ class FuturePage extends StatefulWidget {
 
 class _FuturePageState extends State<FuturePage> {
   String result = '';
+  int appCounter = 0;
+  Future readAndWritePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    appCounter = prefs.getInt('appCounter') ?? 0;
+    appCounter++;
+    await prefs.setInt('appCounter', appCounter);
+    setState(() {
+      appCounter = appCounter;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readAndWritePreference();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,44 +67,36 @@ class _FuturePageState extends State<FuturePage> {
         child: Column(
           children: [
             const Spacer(),
-            ElevatedButton(
-              child: Text('GO!'),
-              onPressed: () {
-                handleError();
-                // returnError()
-                //     .then((value) {
-                //       setState(() {
-                //         result = 'Success';
-                //       });
-                //     })
-                //     .catchError((error) {
-                //       setState(() {
-                //         result = error.toString();
-                //       });
-                //     })
-                //     .whenComplete(() => print('Complete'));
-                // returnFG();
-                // setState(() {});
-                // getData().then((value) {
-                //   result = value.body.toString().substring(0, 450);
-                //   setState(() {});
-                // }).catchError((_) {
-                //   result = 'An error occured';
-                //   setState(() {});
-                // });
-                // count();
-                // command baru
-                // getNumber().then((value) {
-                //   setState(() {
-                //     result = value.toString();
-                //   });
-                // }).catchError((e) {
-                //   setState(() {
-                //     result = 'An error occurred';
-                //   });
-                // });
-              },
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('You have opened the app $appCounter times.'),
+                  ElevatedButton(
+                    // onPressed: () async {
+                    //   SharedPreferences prefs =
+                    //       await SharedPreferences.getInstance();
+                    //   await prefs.setInt('appCounter', 0); // Reset counter
+                    //   setState(() {
+                    //     appCounter = 0;
+                    //   });
+                    // },
+                    onPressed: () {
+                      deletePreference();
+                    },
+                    child: const Text('Reset counter'),
+                  ),
+                ],
+              ),
             ),
+            // const Spacer(),
+            // ElevatedButton(
+            //   child: Text('GO!'),
+            //   onPressed: () {
+            //     handleError();
+            //     // Other functionality here
+            //   },
+            // ),
             const Spacer(),
             Text(result),
             const Spacer(),
@@ -100,6 +109,14 @@ class _FuturePageState extends State<FuturePage> {
   }
 
   late Completer completer;
+
+  Future deletePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    setState(() {
+      appCounter = 0;
+    });
+  }
 
   Future getNumber() {
     completer = Completer<int>();

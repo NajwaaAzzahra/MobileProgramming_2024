@@ -4,15 +4,14 @@
 - **Kelas**: TI-3C
 - **NIM**: 2241720139
 
-
 ## Praktikum 1: Converting Dart models into JSON
 
 1. Buat proyek Flutter baru dan beri nama store_data
 
 <img src="img/1.1.png"/>
 
-2. Pada file main.dart, hapus kode yang ada dan tambahkan kode awal untuk aplikasi dengan kode 
-berikut:
+2. Pada file main.dart, hapus kode yang ada dan tambahkan kode awal untuk aplikasi dengan kode
+   berikut:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -50,7 +49,7 @@ class _MyHomePageState extends State<myHomePage> {
     super.initState();
     readJsonFile();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,48 +72,48 @@ class _MyHomePageState extends State<myHomePage> {
 
 <img src="img/1.3.png"/>
 
-4. Di dalam folder aset, buat file baru bernama pizzalist.json dan salin konten yang tersedia di tautan 
-https://gist.github.com/simoales/a33c1c2abe78b48a75ccfd5fa0de0620 File ini berisi daftar objek 
-JSON.
+4. Di dalam folder aset, buat file baru bernama pizzalist.json dan salin konten yang tersedia di tautan
+   https://gist.github.com/simoales/a33c1c2abe78b48a75ccfd5fa0de0620 File ini berisi daftar objek
+   JSON.
 
-``` json
-[ 
-    { 
-      "id": 1, 
-      "pizzaName": "Margherita", 
-      "description": "Pizza with tomato, fresh mozzarella and basil",
-      "price": 8.75, 
-      "imageUrl": "images/margherita.png" 
-    }, 
-    { 
-      "id": 2, 
-      "pizzaName": "Marinara", 
-      "description": "Pizza with tomato, garlic and oregano",
-      "price": 7.50, 
-      "imageUrl": "images/marinara.png"  
-    }, 
-    { 
-      "id": 3, 
-      "pizzaName": "Napoli", 
-      "description": "Pizza with tomato, garlic and anchovies",
-      "price": 9.50, 
-      "imageUrl": "images/marinara.png"  
-    }, 
-    { 
-      "id": 4, 
-      "pizzaName": "Carciofi", 
-      "description": "Pizza with tomato, fresh mozzarella and artichokes",
-      "price": 8.80, 
-      "imageUrl": "images/marinara.png"  
-    }, 
-    { 
-      "id": 5, 
-      "pizzaName": "Bufala", 
-      "description": "Pizza with tomato, buffalo mozzarella and basil",
-      "price": 12.50, 
-      "imageUrl": "images/marinara.png"  
-    }
-   ]
+```json
+[
+  {
+    "id": 1,
+    "pizzaName": "Margherita",
+    "description": "Pizza with tomato, fresh mozzarella and basil",
+    "price": 8.75,
+    "imageUrl": "images/margherita.png"
+  },
+  {
+    "id": 2,
+    "pizzaName": "Marinara",
+    "description": "Pizza with tomato, garlic and oregano",
+    "price": 7.5,
+    "imageUrl": "images/marinara.png"
+  },
+  {
+    "id": 3,
+    "pizzaName": "Napoli",
+    "description": "Pizza with tomato, garlic and anchovies",
+    "price": 9.5,
+    "imageUrl": "images/marinara.png"
+  },
+  {
+    "id": 4,
+    "pizzaName": "Carciofi",
+    "description": "Pizza with tomato, fresh mozzarella and artichokes",
+    "price": 8.8,
+    "imageUrl": "images/marinara.png"
+  },
+  {
+    "id": 5,
+    "pizzaName": "Bufala",
+    "description": "Pizza with tomato, buffalo mozzarella and basil",
+    "price": 12.5,
+    "imageUrl": "images/marinara.png"
+  }
+]
 ```
 
 5. Di file pubspec.yaml, tambahkan referensi ke folder aset baru, seperti yang ditunjukkan di sini:
@@ -124,16 +123,16 @@ assets:
   - assets/
 ```
 
-6. Pada kelas _MyHomePageState, di main.dart, tambahkan sebuah variabel state bernama
-pizzaString:
+6. Pada kelas \_MyHomePageState, di main.dart, tambahkan sebuah variabel state bernama
+   pizzaString:
 
 ```dart
 String pizzaString = '';
 ```
 
-7. Untuk membaca isi file pizzalist.json, di bagian bawah kelas _MyHomePageState di main.dart,
-tambahkan metode asinkron baru yang disebut readJsonFile, yang akan mengatur nilai pizzaString,
-seperti yang ditunjukkan di sini:
+7. Untuk membaca isi file pizzalist.json, di bagian bawah kelas \_MyHomePageState di main.dart,
+   tambahkan metode asinkron baru yang disebut readJsonFile, yang akan mengatur nilai pizzaString,
+   seperti yang ditunjukkan di sini:
 
 ```dart
 Future readJsonFile() async {
@@ -144,8 +143,8 @@ Future readJsonFile() async {
   }
 ```
 
-8. Pada kelas _MyHomePageState, timpa metode initState dan, di dalamnya, panggil metode
-readJsonFile:
+8. Pada kelas \_MyHomePageState, timpa metode initState dan, di dalamnya, panggil metode
+   readJsonFile:
 
 ```dart
 @override
@@ -154,10 +153,11 @@ readJsonFile:
     readJsonFile();
   }
 ```
-9. Sekarang, kita ingin menampilkan JSON yang diambil di properti dalam Scaffold. Untuk
-melakukannya, tambahkan widget Teks sebagai child dari Container kita:
 
-``` dart
+9. Sekarang, kita ingin menampilkan JSON yang diambil di properti dalam Scaffold. Untuk
+   melakukannya, tambahkan widget Teks sebagai child dari Container kita:
+
+```dart
 @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,6 +167,7 @@ melakukannya, tambahkan widget Teks sebagai child dari Container kita:
     );
   }
 ```
+
 10. Mari kita jalankan aplikasinya. Jika semuanya berjalan seperti yang diharapkan, Anda akan melihat konten file JSON di layar
 
 <img src="img/1.10.png"/>
@@ -208,7 +209,7 @@ Pizza.fromJson(Map<String, dynamic> json)
         imageUrl = json['imageUrl'];
 ```
 
-14. Refaktor metode readJsonFile() pada kelas _MyHomePageState. Langkah pertama adalah mengubah String menjadi Map dengan memanggil metode jsonDecode. Pada method readJsonFile,tambahkan kode yang di cetak tebal berikut ini:
+14. Refaktor metode readJsonFile() pada kelas \_MyHomePageState. Langkah pertama adalah mengubah String menjadi Map dengan memanggil metode jsonDecode. Pada method readJsonFile,tambahkan kode yang di cetak tebal berikut ini:
 
 ```dart
 Future readJsonFile() async {
@@ -226,6 +227,7 @@ Future readJsonFile() async {
 import 'dart:convert';
 import './pizza.dart'
 ```
+
 16. Langkah terakhir adalah mengonversi string JSON kita menjadi List of native Dart objects. Kita dapat melakukan ini dengan mengulang pizzaMapList dan mengubahnya menjadi objek Pizza. Di dalam metode readJsonFile, di bawah metode jsonDecode, tambahkan kode berikut:
 
 ```dart
@@ -259,10 +261,10 @@ Future readJsonFile() async {
 18. Ubah signature metode sehingga Anda dapat menampilkan nilai balik secara eksplisit:
 
 ```dart
-Future<List<Pizza>> readJsonFile() async 
+Future<List<Pizza>> readJsonFile() async
 ```
 
-19. Sekarang kita memiliki objek List of Pizza. Daripada hanya menampilkan sebuah Teks kepada pengguna, kita dapat menampilkan sebuah ListView yang berisi sekumpulan widget ListTile. Di bagian atas kelas _MyHomePageState, buat List<Pizza> bernama myPizzas:
+19. Sekarang kita memiliki objek List of Pizza. Daripada hanya menampilkan sebuah Teks kepada pengguna, kita dapat menampilkan sebuah ListView yang berisi sekumpulan widget ListTile. Di bagian atas kelas \_MyHomePageState, buat List<Pizza> bernama myPizzas:
 
 ```dart
 List<Pizza> pizzas = [];
@@ -304,7 +306,7 @@ List<Pizza> pizzas = [];
 
 1. Tambahkan metode baru ke kelas Pizza, di file pizza.dart, yang disebut toJson. Ini akan mengembalikan sebuah Map<String, dynamic> dari objek:
 
-``` dart
+```dart
 Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -315,386 +317,529 @@ Map<String, dynamic> toJson() {
     };
   }
 ```
-2. Setelah Anda memiliki sebuah Map, Anda dapat menserialisasikannya kembali ke dalam string JSON. Tambahkan metode baru di di bagian bawah kelas _MyHomePageState, di dalam file main.dart, yang disebut convertToJSON:
+
+2. Setelah Anda memiliki sebuah Map, Anda dapat menserialisasikannya kembali ke dalam string JSON. Tambahkan metode baru di di bagian bawah kelas \_MyHomePageState, di dalam file main.dart, yang disebut convertToJSON:
 
 ```dart
 String convertToJSON(List<Pizza> pizzas) {
     return jsonEncode(pizzas.map((pizza) => jsonEncode(pizza)).toList());
   }
 ```
+
 3.  Metode ini mengubah objek List of Pizza kembali menjadi string Json dengan memanggil metode jsonEncode lagi di pustaka dart_convert.
 
-4. Terakhir, mari panggil metode tersebut dan cetak string JSON di Debug Console. Tambahkan kode berikut ke metode readJsonFile, tepat sebelum mengembalikan List myPizzas:
+4.  Terakhir, mari panggil metode tersebut dan cetak string JSON di Debug Console. Tambahkan kode berikut ke metode readJsonFile, tepat sebelum mengembalikan List myPizzas:
+
 ```dart
 String json = convertToJSON(myPizzas);
     print(json);
     return myPizzas;
 ```
+
 5. Jalankan aplikasi. Anda akan melihat string JSON dicetak, seperti yang ditunjukkan pada gambar berikut:
 
 <img src = "img/2.5.png">
 
 ## Praktikum 3: Saving data simply with SharedPreferences
 
-1. 
-```dart
+1. Gunakan project pada pertemuan 11 bernama books. Pertama, tambahkan ketergantungan pada
+   shared_preferences. Dari Terminal Anda, ketikkan perintah berikut
 
 ```
-2. 
-```dart
+flutter pub add shared_preferences
+```
+
+2. Untuk memperbarui dependensi dalam proyek Anda, jalankan perintah flutter pub get dari jendela Terminal.
+
+<img src = img/3.2.png>
+
+3. Di bagian atas file main.dart, impor shared_preferences:
 
 ```
-3. 
-```dart
+import 'package:shared_preferences/shared_preferences.dart';
+```
+
+4.  Di bagian atas kelas \_MyHomePageState, buat variabel status integer baru bernama appCounter:
 
 ```
-4. 
+int appCounter = 0;
+```
+
+5. Dalam kelas \_MyHomePageState, buat metode asinkron baru yang disebut readAndWritePreferences():
+
+```dart
+Future readAndWritePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    appCounter = prefs.getInt('appCounter') ?? 0;
+    appCounter++;
+    await prefs.setInt('appCounter', appCounter);
+    setState(() {
+      appCounter = appCounter;
+    });
+  }
+```
+
+10. Pada metode initState di kelas \_MyHomePageState, panggil metode readAndWritePreference() dengan kode yang dicetak tebal:
+
+```dart
+@override
+  void initState() {
+    super.initState();
+    readAndWritePreference();
+  }
+```
+
+11. Dalam metode build, tambahkan kode berikut ini di dalam widget Container:
+
 ```dart
 
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('You have opened the app $appCounter times.'),
+                  ElevatedButton(
+                    onPressed: () {
+                      deletePreference();
+                    },
+                    child: const Text('Reset counter'),
+                  ),
+                   ],
+              ),
+            ),
 ```
-5. 
-```dart
 
-```
-6. 
-```dart
+12. Jalankan aplikasi. Saat pertama kali membukanya, Anda akan melihat layar yang mirip dengan yang berikut ini:
 
-```
-7. 
-```dart
+<img src = img/3b.gif>
 
-```
-8. 
-```dart
+13. Tambahkan metode baru ke kelas \_MyHomePageState yang disebut deletePreference(), yang akan menghapus nilai yang disimpan:
 
-```
-9. 
 ```dart
-
+Future deletePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    setState(() {
+      appCounter = 0;
+    });
+  }
 ```
-10. 
+
+14. Dari properti onPressed dari widget ElevatedButton di metode build(), memanggil metode deletePreference(), dengan kode di cetak tebal:
+
 ```dart
-
+ElevatedButton(
+onPressed: () {
+                      deletePreference();
+                    },
+                    child: const Text('Reset counter'),
+                  ),
 ```
-11. 
-```dart
 
-```
-12. 
-```dart
+15. Jalankan aplikasi lagi. Sekarang, saat Anda menekan tombol Reset penghitung, nilai appCounter akan dihapus
 
-```
-13. 
-```dart
 
-```
-14. 
-```dart
+<img src = img/3a.gif>
 
-```
-15. 
-```dart
-
-```
-16. 
-```dart
-
-```
-17. 
-```dart
-
-```
-18. 
-```dart
-
-```
-19. 
-```dart
-
-```
-20. 
-```dart
-
-```
-21. 
-```dart
-
-```
-22. 
-```dart
-
-```
- 
 
 ## Praktikum 4: Accessing the filesystem, part 1: path_provider
 
-1. 
+1.
+
 ```dart
 
 ```
-2. 
+
+2.
+
 ```dart
 
 ```
-3. 
+
+3.
+
 ```dart
 
 ```
-4. 
+
+4.
+
 ```dart
 
 ```
-5. 
+
+5.
+
 ```dart
 
 ```
-6. 
+
+6.
+
 ```dart
 
 ```
-7. 
+
+7.
+
 ```dart
 
 ```
-8. 
+
+8.
+
 ```dart
 
 ```
-9. 
+
+9.
+
 ```dart
 
 ```
-10. 
+
+10.
+
 ```dart
 
 ```
-11. 
+
+11.
+
 ```dart
 
 ```
-12. 
+
+12.
+
 ```dart
 
 ```
-13. 
+
+13.
+
 ```dart
 
 ```
-14. 
+
+14.
+
 ```dart
 
 ```
-15. 
+
+15.
+
 ```dart
 
 ```
-16. 
+
+16.
+
 ```dart
 
 ```
-17. 
+
+17.
+
 ```dart
 
 ```
-18. 
+
+18.
+
 ```dart
 
 ```
-19. 
+
+19.
+
 ```dart
 
 ```
-20. 
+
+20.
+
 ```dart
 
 ```
-21. 
+
+21.
+
 ```dart
 
 ```
-22. 
+
+22.
+
 ```dart
 
 ```
 
 ## Praktikum 5: Accessing the filesystem, part 2: Working with directories
 
-1. 
+1.
+
 ```dart
 
 ```
-2. 
+
+2.
+
 ```dart
 
 ```
-3. 
+
+3.
+
 ```dart
 
 ```
-4. 
+
+4.
+
 ```dart
 
 ```
-5. 
+
+5.
+
 ```dart
 
 ```
-6. 
+
+6.
+
 ```dart
 
 ```
-7. 
+
+7.
+
 ```dart
 
 ```
-8. 
+
+8.
+
 ```dart
 
 ```
-9. 
+
+9.
+
 ```dart
 
 ```
-10. 
+
+10.
+
 ```dart
 
 ```
-11. 
+
+11.
+
 ```dart
 
 ```
-12. 
+
+12.
+
 ```dart
 
 ```
-13. 
+
+13.
+
 ```dart
 
 ```
-14. 
+
+14.
+
 ```dart
 
 ```
-15. 
+
+15.
+
 ```dart
 
 ```
-16. 
+
+16.
+
 ```dart
 
 ```
-17. 
+
+17.
+
 ```dart
 
 ```
-18. 
+
+18.
+
 ```dart
 
 ```
-19. 
+
+19.
+
 ```dart
 
 ```
-20. 
+
+20.
+
 ```dart
 
 ```
-21. 
+
+21.
+
 ```dart
 
 ```
-22. 
+
+22.
+
 ```dart
 
-``` 
+```
 
 ## Praktikum 6: Using secure storage to store data
 
-1. 
+1.
+
 ```dart
 
 ```
-2. 
+
+2.
+
 ```dart
 
 ```
-3. 
+
+3.
+
 ```dart
 
 ```
-4. 
+
+4.
+
 ```dart
 
 ```
-5. 
+
+5.
+
 ```dart
 
 ```
-6. 
+
+6.
+
 ```dart
 
 ```
-7. 
+
+7.
+
 ```dart
 
 ```
-8. 
+
+8.
+
 ```dart
 
 ```
-9. 
+
+9.
+
 ```dart
 
 ```
-10. 
+
+10.
+
 ```dart
 
 ```
-11. 
+
+11.
+
 ```dart
 
 ```
-12. 
+
+12.
+
 ```dart
 
 ```
-13. 
+
+13.
+
 ```dart
 
 ```
-14. 
+
+14.
+
 ```dart
 
 ```
-15. 
+
+15.
+
 ```dart
 
 ```
-16. 
+
+16.
+
 ```dart
 
 ```
-17. 
+
+17.
+
 ```dart
 
 ```
-18. 
+
+18.
+
 ```dart
 
 ```
-19. 
+
+19.
+
 ```dart
 
 ```
-20. 
+
+20.
+
 ```dart
 
 ```
-21. 
+
+21.
+
 ```dart
 
 ```
-22. 
+
+22.
+
 ```dart
 
 ```
