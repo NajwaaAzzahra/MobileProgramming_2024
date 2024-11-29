@@ -97,27 +97,68 @@ class _MyHomePageState extends State<MyHomePage> {
           }
 
           return ListView.builder(
-            itemCount: snapshot.data!.length,
+            itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
             itemBuilder: (BuildContext context, int position) {
-              final Pizza currentPizza = snapshot.data![position];
-              return ListTile(
-                title: Text(currentPizza.pizzaName),
-                subtitle: Text(
-                  '${currentPizza.description} - € ${currentPizza.price.toStringAsFixed(2)}',
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PizzaDetailScreen(
-                        pizza: currentPizza,
-                        isNew: false, // Editing existing pizza
-                      ),
-                    ),
-                  );
+              return Dismissible(
+                key: Key(snapshot.data![position].id.toString()),
+                onDismissed: (direction) {
+                  setState(() {
+                    HttpHelper helper = HttpHelper();
+                    // Save the deleted pizza details before removing it
+                    Pizza deletedPizza = snapshot.data![position];
+
+                    // Call delete API
+                    helper.deletePizza(deletedPizza.id);
+
+                    // Remove the pizza from the list
+                    snapshot.data!.removeAt(position);
+
+                    // Log the deletion in the console
+                    print(
+                        "Deleted Pizza: ${deletedPizza.pizzaName} (ID: ${deletedPizza.id})");
+                  });
                 },
+                child: ListTile(
+                  title: Text(snapshot.data![position].pizzaName),
+                  subtitle: Text(
+                    '${snapshot.data![position].description} - € ${snapshot.data![position].price.toStringAsFixed(2)}',
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PizzaDetailScreen(
+                          pizza: snapshot.data![position],
+                          isNew: false,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               );
             },
+
+            // itemCount: snapshot.data!.length,
+            // itemBuilder: (BuildContext context, int position) {
+            //   final Pizza currentPizza = snapshot.data![position];
+            //   return ListTile(
+            //     title: Text(currentPizza.pizzaName),
+            //     subtitle: Text(
+            //       '${currentPizza.description} - € ${currentPizza.price.toStringAsFixed(2)}',
+            //     ),
+            //     onTap: () {
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => PizzaDetailScreen(
+            //             pizza: currentPizza,
+            //             isNew: false, // Editing existing pizza
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   );
+            // },
           );
         },
       ),

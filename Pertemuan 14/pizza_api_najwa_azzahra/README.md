@@ -307,7 +307,7 @@ floatingActionButton: FloatingActionButton(
 melihat hasil yang berhasil, seperti yang ditunjukkan pada gambar berikut.
 <img src="img/2.16.gif"/> 
 
-## Praktikum 3: Praktikum 3, PUT-ting data
+## Praktikum 3: PUT-ting data
 
 1.  Masuk ke layanan Lab Mock di https://app.wiremock.cloud/ dan klik bagian Stubs, 
 kemudian, buatlah stub baru.
@@ -445,7 +445,7 @@ floatingActionButton: FloatingActionButton(
 
 <img src="img/3.1.gif"/>
 
-## Praktikum 4: Praktikum 4, DELETE-ing data
+## Praktikum 4: DELETE-ing data
 
 1. Masuk ke layanan Wiremock di https://app.wiremock.cloud dan klik pada bagian Stubs pada contoh API. Kemudian, buatlah sebuah stub baru
 
@@ -457,20 +457,72 @@ floatingActionButton: FloatingActionButton(
 - Body Type: json
 - Body: {"message": "Pizza was deleted"}
 
-<img src="img/3.2.png"/>
+<img src="img/4.2.png"/>
 
 3. Save the new stub
 
 4. Di proyek Flutter, tambahkan metode deletePizza ke kelas HttpHelper di file http_helper.dart
 
 ```` dart
+Future<String> deletePizza(int id) async {
+    const deletePath = '/pizza';
+    Uri url = Uri.https(authority, deletePath);
+    http.Response r = await http.delete(
+      url,
+    );
+    return r.body;
+  }
 ````
 
 5.  Pada file main.dart, di metode build kelas _MyHomePageState, refaktor itemBuilder dari ListView.builder agar ListTile terdapat dalam widget Dismissible, seperti berikut
 
 ```` dart
+          return ListView.builder(
+            itemCount: (snapshot.data == null) ? 0 : snapshot.data!.length,
+            itemBuilder: (BuildContext context, int position) {
+              return Dismissible(
+                key: Key(snapshot.data![position].id.toString()),
+                onDismissed: (direction) {
+                  setState(() {
+                    HttpHelper helper = HttpHelper();
+                    // Save the deleted pizza details before removing it
+                    Pizza deletedPizza = snapshot.data![position];
+
+                    // Call delete API
+                    helper.deletePizza(deletedPizza.id);
+
+                    // Remove the pizza from the list
+                    snapshot.data!.removeAt(position);
+
+                    // Log the deletion in the console
+                    print(
+                        "Deleted Pizza: ${deletedPizza.pizzaName} (ID: ${deletedPizza.id})");
+                  });
+                },
+                child: ListTile(
+                  title: Text(snapshot.data![position].pizzaName),
+                  subtitle: Text(
+                    '${snapshot.data![position].description} - € ${snapshot.data![position].price.toStringAsFixed(2)}',
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PizzaDetailScreen(
+                          pizza: snapshot.data![position],
+                          isNew: false,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          );
 ````
 
 6. Jalankan aplikasi. Saat Anda menggeser elemen apa pun dari daftar pizza, ListTile akan menghilang
 
-<img src="img/3.6.png"/>
+<img src="img/4.png"/>
+
+<img src="img/4.gif"/>
