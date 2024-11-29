@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pizza_api_najwa_azzahra/httphelper.dart';
 import 'package:pizza_api_najwa_azzahra/pizza.dart';
+import 'package:pizza_api_najwa_azzahra/pizza_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -79,37 +79,45 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      backgroundColor: const Color.fromARGB(255, 231, 185, 212),
-      title: const Text('Najwa JSON'),
-    ),
-    body: FutureBuilder<List<Pizza>>(
-      future: callPizzas(),
-      builder: (BuildContext context, AsyncSnapshot<List<Pizza>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return const Center(child: Text('Something went wrong'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No data available'));
-        }
-        
-        return ListView.builder(
-          itemCount: snapshot.data!.length,
-          itemBuilder: (BuildContext context, int position) {
-            return ListTile(
-              title: Text(snapshot.data![position].pizzaName),
-              subtitle: Text(
-                '${snapshot.data![position].description} - € ${snapshot.data![position].price}'
-              ),
-            );
-          },
-        );
-      },
-    ),
-  );
-}
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 231, 185, 212),
+        title: const Text('Najwa JSON'),
+      ),
+      body: FutureBuilder<List<Pizza>>(
+        future: callPizzas(),
+        builder: (BuildContext context, AsyncSnapshot<List<Pizza>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('Something went wrong'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No data available'));
+          }
 
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (BuildContext context, int position) {
+              return ListTile(
+                title: Text(snapshot.data![position].pizzaName),
+                subtitle: Text(
+                    '${snapshot.data![position].description} - € ${snapshot.data![position].price}'),
+              );
+            },
+          );
+        },
+      ),
+      //floating action button
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PizzaDetailScreen()),
+          );
+        },
+      ),
+    );
+  }
 }
