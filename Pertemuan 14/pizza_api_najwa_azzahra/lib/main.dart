@@ -99,10 +99,23 @@ class _MyHomePageState extends State<MyHomePage> {
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (BuildContext context, int position) {
+              final Pizza currentPizza = snapshot.data![position];
               return ListTile(
-                title: Text(snapshot.data![position].pizzaName),
+                title: Text(currentPizza.pizzaName),
                 subtitle: Text(
-                    '${snapshot.data![position].description} - € ${snapshot.data![position].price}'),
+                  '${currentPizza.description} - € ${currentPizza.price.toStringAsFixed(2)}',
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PizzaDetailScreen(
+                        pizza: currentPizza,
+                        isNew: false, // Editing existing pizza
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );
@@ -114,7 +127,18 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PizzaDetailScreen()),
+            MaterialPageRoute(
+              builder: (context) => PizzaDetailScreen(
+                pizza: Pizza(
+                  id: 0, // Default values for a new pizza
+                  pizzaName: '',
+                  description: '',
+                  price: 0.0,
+                  imageUrl: '',
+                ),
+                isNew: true,
+              ),
+            ),
           );
         },
       ),

@@ -3,7 +3,12 @@ import 'httphelper.dart';
 import 'pizza.dart';
 
 class PizzaDetailScreen extends StatefulWidget {
-  const PizzaDetailScreen({super.key});
+  const PizzaDetailScreen({
+    super.key, 
+    required this.pizza,
+    required this.isNew});
+  final Pizza pizza;
+  final bool isNew;
 
   @override
   State<PizzaDetailScreen> createState() => _PizzaDetailScreenState();
@@ -95,6 +100,28 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
     });
   }
 
+
+  Future savePizza() async {
+    HttpHelper helper = HttpHelper();
+    Pizza pizza = Pizza(
+      id: int.tryParse(txtId.text) ?? 0,
+      pizzaName: txtName.text,
+      description: txtDescription.text,
+      price: double.tryParse(txtPrice.text) ?? 0.0,
+      imageUrl: txtImageUrl.text,
+    );
+
+    //memanggil postPizza atau putPizza berdasarkan 'isNew'
+    final result = await (widget.isNew
+        ? helper.postPizza(pizza)
+        : helper.putPizza(pizza));
+
+    setState(() {
+      operationResult = result;
+    });
+    
+  }
+
   @override
   void dispose() {
     txtId.dispose();
@@ -103,5 +130,17 @@ class _PizzaDetailScreenState extends State<PizzaDetailScreen> {
     txtPrice.dispose();
     txtImageUrl.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (!widget.isNew) {
+      txtId.text = widget.pizza.id.toString();
+      txtName.text = widget.pizza.pizzaName;
+      txtDescription.text = widget.pizza.description;
+      txtPrice.text = widget.pizza.price.toString();
+      txtImageUrl.text = widget.pizza.imageUrl;
+    }
+    super.initState();
   }
 }
